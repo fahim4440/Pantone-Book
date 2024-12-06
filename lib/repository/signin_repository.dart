@@ -1,6 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../model/user_model.dart';
@@ -58,5 +56,10 @@ class SigninRepository {
     }
     UserModel user = UserModel.fromMap(users.docs[0].data());
     return user;
+  }
+
+  Future<void> savePasswordInTheDevice(String email, String password) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("password", password);
   }
 }

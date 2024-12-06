@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pantone_book/bloc/homepage/homepage_bloc.dart';
 import 'package:pantone_book/bloc/search_color/color_search_bloc.dart';
 import 'package:pantone_book/bloc/signin/signin_bloc.dart';
-import 'screens/homepage.dart';
+import 'screens/homepage/homepage.dart';
 import 'bloc/color_picker/color_picker_bloc.dart';
-import 'screens/signin_page.dart';
+import 'screens/signin_page/signin_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'bloc/signup/signup_bloc.dart';
@@ -21,7 +22,7 @@ void main() async {
         create: (BuildContext context) => ColorPickerBloc(),
       ),
       BlocProvider(
-        create: (BuildContext context) => ColorSearchBloc(),
+        create: (BuildContext context) => HomepageBloc(),
       ),
       BlocProvider(
         create: (BuildContext context) => SignupBloc(),
@@ -36,29 +37,16 @@ void main() async {
     child: const MyApp(),
   ));
 }
-// void main() async {
-//   runApp(MultiBlocProvider(
-//     providers: [
-//       BlocProvider(
-//         create: (BuildContext context) => ColorPickerBloc(),
-//       ),
-//       BlocProvider(
-//         create: (BuildContext context) => ColorSearchBloc(),
-//       ),
-//     ],
-//     child: const MyApp(),
-//   ));
-// }
-//
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (context) => CheckLoggedInBloc()..add(CheckLoggedInEvent()),
+        create: (context) => CheckLoggedInBloc()..add(const CheckLoggedInEvent()),
         child: BlocBuilder<CheckLoggedInBloc, CheckLoggedInState>(
           builder: (context, state) {
             if (state is LoggedInState) {

@@ -10,6 +10,5 @@ final class ColorSearchTriggerEvent extends ColorSearchEvent {
   const ColorSearchTriggerEvent(this.query);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [query];
 }

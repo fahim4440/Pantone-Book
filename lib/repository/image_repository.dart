@@ -5,13 +5,14 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/color_picker_from_image.dart';
 import 'package:image/image.dart' as img;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ImageRepository {
   Future<void> pickImageFromCamera(BuildContext context) async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
-      File compressedImage = compressAndResizeImage(image);
+      File compressedImage = await compressAndResizeImage(image);
       Navigator.push(
         context, MaterialPageRoute(builder: (context) => ColorPickerFromImage(compressedImage),));
     }
@@ -21,12 +22,12 @@ class ImageRepository {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
-      File compressedImage = compressAndResizeImage(image);
+      File compressedImage = await compressAndResizeImage(image);
       Navigator.push(context, MaterialPageRoute(builder: (context) => ColorPickerFromImage(compressedImage)));
     }
   }
 
-  File compressAndResizeImage(File file) {
+  Future<File> compressAndResizeImage(File file) async {
     img.Image? image = img.decodeImage(file.readAsBytesSync());
 
     // Resize the image to have the longer side be 800 pixels
@@ -46,8 +47,12 @@ class ImageRepository {
     // Compress the image with JPEG format
     List<int> compressedBytes = img.encodeJpg(resizedImage, quality: 85);  // Adjust quality as needed
 
+    // Get the temporary directory
+    final tempDir = await getTemporaryDirectory();
+    final compressedFilePath = '${tempDir.path}/compressed_image.jpg';
+
     // Save the compressed image to a file
-    File compressedFile = File(file.path.replaceFirst('.jpg', '_compressed.jpg'));
+    File compressedFile = File(compressedFilePath);
     compressedFile.writeAsBytesSync(compressedBytes);
 
     return compressedFile;
@@ -56,7 +61,7 @@ class ImageRepository {
   Future<bool> isUserLoggedIn() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     bool? isLoggedIn = preferences.getBool('loggedIn');
-    if(isLoggedIn == null) {
+    if (isLoggedIn == null) {
       return false;
     } else {
       return isLoggedIn;

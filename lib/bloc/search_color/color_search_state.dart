@@ -11,7 +11,6 @@ final class ColorSearchInitial extends ColorSearchState {
 
 final class ColorSearchLoadingState extends ColorSearchState {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
@@ -21,7 +20,6 @@ final class ColorSearchLoadedState extends ColorSearchState {
 
   const ColorSearchLoadedState(this.colors);
   @override
-  // TODO: implement props
   List<Object?> get props => [colors];
 }
 
@@ -31,6 +29,5 @@ final class ColorSearchErrorState extends ColorSearchState {
   const ColorSearchErrorState(this.errorMessage);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [errorMessage];
 }

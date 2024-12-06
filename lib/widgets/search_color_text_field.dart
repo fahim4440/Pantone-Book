@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pantone_book/bloc/homepage/homepage_bloc.dart';
+import 'package:pantone_book/model/trendy_color_model.dart';
+import 'package:pantone_book/model/week_banner_model.dart';
 import '../bloc/search_color/color_search_bloc.dart';
 
-TextField SearchColorTextField(BuildContext context) {
+TextField SearchColorTextField(
+    {required BuildContext context,
+    WeekBannerModel? weekBannerModel,
+    List<TrendyColorModel>? trendyColorModels, String? trendyText, FocusNode? focusNode, TextEditingController? controller}) {
   return TextField(
-    onChanged: (String query) {
-      BlocProvider.of<ColorSearchBloc>(context).add(
-          ColorSearchTriggerEvent(query));
-    },
+    onChanged: weekBannerModel != null ? (String query) {
+      BlocProvider.of<HomepageBloc>(context).add(
+          HomepageSearchTriggerEvent(query: query, weekBannerModel: weekBannerModel, trendyColorModels: trendyColorModels!, trendyText: trendyText!));
+    } : null,
+    focusNode: focusNode,
+    controller: controller,
     decoration: const InputDecoration(
-      suffixIcon: Icon(Icons.search),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.transparent, width: 6.0),
         borderRadius: BorderRadius.only(
