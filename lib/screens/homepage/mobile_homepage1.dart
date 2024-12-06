@@ -99,12 +99,12 @@ class _MobileHomepage1State extends State<MobileHomepage1> with TickerProviderSt
             children: [
               Container(
                 width: width,
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: width - 60,
+                      width: width - 70,
                       child: BlocBuilder<HomepageBloc, HomepageState>(
                         builder: (context, state) {
                           if(state is HomepageLoadingState) {
@@ -192,7 +192,7 @@ class _MobileHomepage1State extends State<MobileHomepage1> with TickerProviderSt
                     SlideTransition(
                       position: _headerOffsetAnimation,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+                        padding: const EdgeInsets.only(top: 30, bottom: 10, right: 10, left: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

@@ -9,12 +9,10 @@ part 'signup_state.dart';
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc() : super(SignupState.initial()) {
     on<SignupCompanyNameChanged>((event, emit) {
-      print("company");
       emit(state.copyWith(companyName: event.companyName, isValidCompanyName: _isValidName(event.companyName)));
     });
 
     on<SignupUsernameChanged>((event, emit) {
-      print("username");
       emit(state.copyWith(username: event.username, isValidName: _isValidName(event.username)));
     });
 

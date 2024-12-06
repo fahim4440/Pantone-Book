@@ -18,7 +18,7 @@ class CheckLoggedInBloc extends Bloc<CheckLoggedInEvent, CheckLoggedInState> {
           emit(LoggedOutState());
         }
       } catch(error) {
-        print(error);
+        // print(error);
       }
     });
   }

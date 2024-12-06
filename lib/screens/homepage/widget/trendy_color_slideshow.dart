@@ -29,11 +29,10 @@ class TrendyColorSlideshowState extends State<TrendyColorSlideshow> {
       } else {
         _currentPage = 0;
       }
-
       _pageController.animateToPage(
         _currentPage,
         duration: Duration(milliseconds: 1000),
-        curve: Curves.easeInOutBack,
+        curve: Curves.easeInOut,
       );
     });
   }

@@ -52,7 +52,7 @@ class _MobileProfilePageState extends State<MobileProfilePage> with SingleTicker
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+              padding: const EdgeInsets.only(top: 30, bottom: 10, right: 10, left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

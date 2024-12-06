@@ -25,7 +25,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         UserModel user = await repository.getUserFromSharedPreferences();
         emit(ProfilePageEnterState(user, isSuccess: false, isFailure: true, isSubmitting: false, errorMessage: ''));
       } catch (error) {
-        print(error.toString());
+        // print(error.toString());
       }
     });
   }
